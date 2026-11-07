@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "qemu": {
+    "url": "https://qemu.weilnetz.de/w64/qemu-w64-setup-20260811.exe",
+    "filename": "qemu-w64-setup-20260811.exe",
+    "algorithm": "sha512",
+    "digest": "5bcf9eed634e8575a37b74f445af41a2fe4106da512d0c30c368301d4c105037fdfab40a5287367a28a957624cddebbc8c07e16c88ab6634f554cdf3d16bf543"
+  },
+  "7zip": {
+    "url": "https://github.com/ip7z/7zip/releases/download/26.05/7z2605-x64.exe",
+    "filename": "7z2605-x64.exe",
+    "algorithm": "sha256",
+    "digest": "fd99e86f57d8f429ef5ed045bf98315af962e2309b0f1ba87a147a44c71647d0"
+  },
+  "7zr": {
+    "url": "https://github.com/ip7z/7zip/releases/download/26.05/7zr.exe",
+    "filename": "7zr.exe",
+    "algorithm": "sha256",
+    "digest": "9bf582b894dfa665f852d7e9112b02290a1c303c2d95a21fcdc41ffcb03143b7"
+  },
+  "ubuntu": {
+    "url": "https://cloud-images.ubuntu.com/noble/20261017/noble-server-cloudimg-amd64.img",
+    "filename": "noble-server-cloudimg-amd64.img",
+    "algorithm": "sha256",
+    "digest": "04e8f2461a16a44e78a370284471f29616cdd9baf1893df25807b71f985b6c94"
+  }
+}

@@ -1,0 +1,40 @@
+[Unit]
+Description=Finite passive application-layer research pilot
+After=network-online.target study-egress.service
+Wants=network-online.target
+Requires=study-egress.service
+ConditionPathExists=/etc/phishing-study/pilot.toml
+
+[Service]
+Type=exec
+User=study
+Group=study
+WorkingDirectory=/opt/phishing-study/app
+Environment=PYTHONPATH=/opt/phishing-study/app
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PLAYWRIGHT_BROWSERS_PATH=/opt/phishing-study/browsers
+Environment=HOME=/var/lib/phishing-study
+UMask=0077
+ExecStartPre=/opt/phishing-study/venv/bin/python /opt/phishing-study/app/deployment/linux/gate.py --service
+ExecStart=/opt/phishing-study/venv/bin/python /opt/phishing-study/app/deployment/linux/run-pilot.py
+KillSignal=SIGTERM
+KillMode=mixed
+TimeoutStopSec=130
+Restart=no
+CPUQuota=200%
+MemoryMax=4G
+TasksMax=512
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/phishing-study
+BindReadOnlyPaths=/etc/phishing-study/resolver/resolv.conf:/etc/resolv.conf
+BindReadOnlyPaths=/etc/phishing-study/resolver/nsswitch.conf:/etc/nsswitch.conf
+PrivateTmp=true
+NoNewPrivileges=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_NETLINK
+StandardOutput=append:/var/lib/phishing-study/pilot.log
+StandardError=append:/var/lib/phishing-study/pilot.log
+
+[Install]
+WantedBy=multi-user.target

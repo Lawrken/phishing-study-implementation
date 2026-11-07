@@ -1,0 +1,3 @@
+# Host Python controls the VM; Chromium is installed only inside Ubuntu.
+pycdlib==1.14.0
+tldextract==5.4.0

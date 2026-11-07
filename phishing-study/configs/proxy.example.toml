@@ -1,0 +1,8 @@
+profile = "live"
+proxy_required = true
+route_id = "university-tunnel-01"
+region = "set-to-approved-egress-region"
+network_isolation_verified = false
+interaction = "none"
+# Supply STUDY_PROXY_SERVER, STUDY_PROXY_USERNAME, STUDY_PROXY_PASSWORD in environment.
+# A proxy does not establish network isolation or guarantee access to challenged sites.

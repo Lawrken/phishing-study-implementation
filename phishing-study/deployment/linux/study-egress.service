@@ -1,0 +1,13 @@
+[Unit]
+Description=Dedicated study UID egress policy
+After=network-online.target
+Before=study-pilot.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/nft --file /etc/phishing-study/collector.nft
+# Policy is deliberately retained when collection stops.
+
+[Install]
+WantedBy=multi-user.target
