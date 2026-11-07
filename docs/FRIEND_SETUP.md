@@ -49,10 +49,10 @@ code .
 Replace the sample location with your actual city and country:
 
 ```powershell
-.\host-tools\SetupResearch.ps1 -Region 'YOUR ACTUAL CITY, COUNTRY'
+.\host-tools\SetupResearch.ps1 -Region 'YOUR ACTUAL CITY, COUNTRY' -InputsArchive 'PATH\study-inputs-v1.zip'
 ```
 
-The command creates a local Python environment, verifies downloads against committed checksums, builds a fresh Ubuntu 24.04 base, installs the pinned guest packages and Chromium, and copies the frozen source CSV, split membership and audit into that VM. It generates new administration and VM host SSH keys for this computer. Existing owner credentials are not downloaded.
+First obtain `study-inputs-v1.zip` privately from the project owner and replace `PATH` above. This is distinct from your assignment CSV. The command creates a local Python environment, verifies downloads against committed checksums, builds a fresh Ubuntu 24.04 base, attempts to install the pinned guest packages and Chromium, and copies the frozen source CSV, split membership and audit into that VM. It generates new administration and VM host SSH keys for this computer. Existing owner credentials are not downloaded. Check the unresolved Chromium-download failure in `docs/RELEASE_VALIDATION.md` before describing setup as complete.
 
 Automatic downloads are:
 
@@ -61,7 +61,7 @@ Automatic downloads are:
 | QEMU Windows 20260811 package | Runs the VM through WHPX; extracted locally, no system installer |
 | 7-Zip 26.05 helpers | Extract the QEMU package locally |
 | Ubuntu Noble cloud image dated 20261017 | Fresh guest operating system |
-| `study-inputs-v1.zip` from the `replication-v1` release | Exact source CSV and frozen split/audit artifacts; about 55 MiB compressed |
+| `study-inputs-v1.zip`, supplied privately | Exact source CSV and frozen split/audit artifacts; about 55 MiB compressed; verified before downloads |
 | Python packages and matching Playwright Chromium | Guest collector/test runtime; Chromium is installed in Ubuntu |
 
 Downloads live under `.local-vm/portable/downloads/`. VM build logs and per-machine keys live under `.local-vm/portable/build-.../`. `.operator/host.json` records their local paths and base-disk hash. All are excluded from Git. Do not upload these folders or share the private keys.
@@ -71,10 +71,10 @@ The first setup can take many minutes. It ends with the VM powered off and no da
 To download first and build later:
 
 ```powershell
-.\host-tools\SetupResearch.ps1 -Region 'YOUR ACTUAL CITY, COUNTRY' -DownloadsOnly
+.\host-tools\SetupResearch.ps1 -Region 'YOUR ACTUAL CITY, COUNTRY' -InputsArchive 'PATH\study-inputs-v1.zip' -DownloadsOnly
 ```
 
-If the input ZIP was downloaded through GitHub's release page, pass its path:
+If the privately supplied input ZIP is in Downloads, pass its path:
 
 ```powershell
 .\host-tools\SetupResearch.ps1 -Region 'YOUR ACTUAL CITY, COUNTRY' -InputsArchive "$HOME\Downloads\study-inputs-v1.zip"
@@ -154,7 +154,7 @@ If local policy prevents PowerShell scripts, do not weaken machine policy. The e
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r .\replication\requirements-host.txt
-.\.venv\Scripts\python.exe -B .\host-tools\PrepareResearchVM.py --region 'YOUR ACTUAL CITY, COUNTRY'
+.\.venv\Scripts\python.exe -B .\host-tools\PrepareResearchVM.py --region 'YOUR ACTUAL CITY, COUNTRY' --inputs-archive 'PATH\study-inputs-v1.zip'
 .\.venv\Scripts\python.exe -B .\host-tools\ResearchOperator.py run --max-attempts 10 --verify-only
 ```
 

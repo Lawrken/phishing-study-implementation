@@ -8,7 +8,7 @@ This project visits frozen PhiUSIIL dataset endpoints inside a disposable Ubuntu
 
 ## Clone and prepare
 
-The repository is public. Install [Git](https://git-scm.com/downloads/win) and [64-bit Python 3.12 or newer](https://www.python.org/downloads/windows/). Windows OpenSSH Client, firmware virtualization and Windows Hypervisor Platform must be available. Setup downloads public release inputs directly; GitHub CLI is optional. Setup does not change Windows features or security settings.
+The source repository is public. Obtain the frozen `study-inputs-v1.zip` privately from the project owner; raw assignment files are also sent directly. Install [Git](https://git-scm.com/downloads/win) and [64-bit Python 3.12 or newer](https://www.python.org/downloads/windows/). Windows OpenSSH Client, firmware virtualization and Windows Hypervisor Platform must be available. GitHub CLI is optional. Setup does not change Windows features or security settings.
 
 In PowerShell:
 
@@ -16,10 +16,10 @@ In PowerShell:
 git clone https://github.com/Lawrken/phishing-study-implementation.git
 cd phishing-study-implementation
 .\host-tools\ResearchOperator.ps1 -Mode Inspect
-.\host-tools\SetupResearch.ps1 -Region 'YOUR ACTUAL CITY, COUNTRY'
+.\host-tools\SetupResearch.ps1 -Region 'YOUR ACTUAL CITY, COUNTRY' -InputsArchive 'PATH\study-inputs-v1.zip'
 ```
 
-Replace the location with the actual collection location. Setup downloads checksum-pinned QEMU and Ubuntu files plus the separately released frozen study inputs. It creates new SSH identities, installs the pinned Python/Chromium environment inside Ubuntu, then powers off the prepared VM. It does not visit dataset websites. Allow several GB of downloads/installation space and time for the first setup.
+Replace the location with the actual collection location and the input path with the privately supplied ZIP. Setup verifies that input archive and downloads checksum-pinned QEMU and Ubuntu files. It creates new SSH identities and attempts to install the pinned Python/Chromium environment inside Ubuntu, then powers off the VM. It does not visit dataset websites. Allow several GB of downloads/installation space and time for the first setup. The unresolved Chromium installation failure is documented above.
 
 Startup requires **5 GiB available Windows RAM and 50 GiB free disk**; 16 GB installed RAM or more is recommended. The VM receives 4 GiB RAM and two CPUs. The collector has one worker, a 2 GiB limit and a separate DNS-service budget.
 

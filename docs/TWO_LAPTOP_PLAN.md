@@ -63,7 +63,7 @@ Compare class coverage, DNS/HTTP outcomes, missing signal groups and observation
 
 ## 6. Reproduce the assignment
 
-From the repository, using the three original inputs from the frozen input release:
+From the repository, using the three original inputs from the privately supplied frozen `study-inputs-v1.zip` (not included in the public code repository):
 
 ```powershell
 python -m pip install tldextract==5.4.0

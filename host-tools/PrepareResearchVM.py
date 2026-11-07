@@ -95,16 +95,16 @@ def build(a):
     if os.name != 'nt':
         raise ValueError('This setup entry point supports Windows x64 with WHPX.')
     region = validate_region(a.region)
+    if a.inputs_archive is None:
+        raise ValueError('Obtain study-inputs-v1.zip privately from the project owner and pass --inputs-archive PATH. Dataset files are not in the public repository.')
+    archive = a.inputs_archive.resolve()
+    expected = json.loads((REPLICATION/'inputs-manifest.json').read_text())['archive']
+    if not archive.is_file() or digest(archive) != expected['sha256'] or archive.stat().st_size != expected['bytes']:
+        raise ValueError('Input archive missing or different from the frozen private transfer.')
     home = ROOT / '.local-vm/portable'
     downloads = home/'downloads'; downloads.mkdir(parents=True, exist_ok=True)
     entries = json.loads((REPLICATION/'downloads.json').read_text())
     packages = {name: download(entries[name], downloads) for name in ('7zr','7zip','qemu','ubuntu')}
-    expected = json.loads((REPLICATION/'inputs-manifest.json').read_text())['archive']
-    archive = a.inputs_archive.resolve() if a.inputs_archive else download({
-        'url':'https://github.com/Lawrken/phishing-study-implementation/releases/download/replication-v1/study-inputs-v1.zip',
-        'filename':expected['name'],'algorithm':'sha256','digest':expected['sha256']},downloads)
-    if digest(archive) != expected['sha256'] or archive.stat().st_size != expected['bytes']:
-        raise ValueError('Input release checksum mismatch.')
     if a.downloads_only:
         print('All downloads are present and verified. No VM was started.'); return 0
     if available_ram() < 5 or shutil.disk_usage(ROOT).free < 50*2**30:

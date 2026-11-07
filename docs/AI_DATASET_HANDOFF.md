@@ -6,7 +6,7 @@ Read this file, `THIS_LAPTOP.json`, `split-manifest.json`, and `DATASET_SPLIT_PL
 
 Prepare a verified assignment-aware collection route for the laptop named in `THIS_LAPTOP.json`. Use only its assigned CSV; never take the other laptop's work. First inspect the repository and saved status. Explain changes in simple English and preserve the original evidence. There is no need to retrain models or relabel the entire dataset.
 
-Repository: https://github.com/Lawrken/phishing-study-implementation. Fork it for changes and submit a pull request for review. Do not require collaborator write access. Keep VM disks, SSH keys, `.operator`, raw browser logs, collected results and research URLs out of source commits; do not force-add ignored files. Raw assignment CSVs are distributed as separate dataset assets, not Git source files.
+Repository: https://github.com/Lawrken/phishing-study-implementation. Fork it for changes and submit a pull request for review. Do not require collaborator write access. Keep VM disks, SSH keys, `.operator`, raw browser logs, collected results and research URLs out of source commits; do not force-add ignored files. Raw assignment CSVs and the frozen common `study-inputs-v1.zip` are supplied privately, not through the public repository. Obtain that common input ZIP from the project owner before VM setup or original-input replay.
 
 ## Facts that must stay accurate
 
