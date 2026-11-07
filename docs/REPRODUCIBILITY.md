@@ -24,6 +24,6 @@ Study inputs are credited to Prasad and Chandra under CC BY 4.0. Reusing the sof
 .\host-tools\ResearchOperator.ps1 -Mode Run -MaxAttempts 10 -VerifyOnly
 ```
 
-Host tests never boot a VM or access the Internet. GitHub Actions runs host regressions and the Linux browser suite against controlled fixtures. CI does not use research URLs, download private input artifacts, start a pilot or approve a collection host.
+Host tests never boot a VM or access the Internet. The GitHub Actions workflow is configured to run host regressions and the Linux browser suite against controlled fixtures. Hosted jobs are currently blocked by the owner's GitHub account billing lock, before any steps run. CI does not use research URLs, download private input artifacts, start a pilot or approve a collection host.
 
 The first setup rehearsal's measured status and any limitations are recorded in [release validation](RELEASE_VALIDATION.md). A successful setup alone is not approval to skip any deployment check.

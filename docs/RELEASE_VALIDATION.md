@@ -12,7 +12,9 @@ Passed:
 Failed and preserved:
 
 - Two fresh Ubuntu setup builds booted, accepted their own SSH identities and installed Python packages. The official pinned Chromium download timed out, including the second attempt with IPv4-first lookup and a 120-second installation connection budget. Both VMs were stopped; no successful base configuration or collection activation was created. The original environment remained unchanged.
-- GitHub Actions reported startup failures before any jobs ran. The exposed diagnostics did not establish a specific cause. These are not passing CI results.
+- GitHub Actions run [42349305682](https://github.com/Lawrken/phishing-study-implementation/actions/runs/42349305682) was diagnosed on 7 November: both the Windows `host` and `linux` jobs had no assigned runner and no executed steps. Both check annotations state: "The job was not started because your account is locked due to a billing issue." These are blocked hosted checks, not executed test failures or passing CI results. Earlier startup failures did not expose this cause through their available diagnostics.
+
+The account owner must review GitHub **Settings → Billing & Licensing** to resolve the restriction. If that page offers no billing issue to resolve, GitHub's [locked-account guidance](https://docs.github.com/en/billing/how-tos/troubleshooting/locked-account) directs the owner to Support. No payment or account settings were changed by this project. Once the lock is cleared, rerun the checks; their code/dependency outcomes remain untested until actual steps execute.
 
 Pending:
 
