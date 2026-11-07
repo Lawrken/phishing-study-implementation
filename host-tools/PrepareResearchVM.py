@@ -140,7 +140,7 @@ def build(a):
     private = work/'private'; private.mkdir()
     # Each computer has different administration and host SSH identities.
     for name in ('operator_key','host_key'):
-        command(['ssh-keygen','-q','-t','ed25519','-N','','-f',private/name])
+        command(['ssh-keygen','-q','-t','ed25519','-N','','-C','research-'+name,'-f',private/name])
     known = private/'known_hosts'
     known.write_text(pinned_host_line((private/'host_key.pub').read_text()))
     value = {'schema_version':1,'region':region,'qemu_directory':str(runtime),
@@ -193,6 +193,8 @@ def build(a):
         (work/'setup-receipt.json').write_text(json.dumps({'status':'passed','configuration':str(configuration),
             'base_sha256':value['base_sha256'],'region':region,'collection_activation':False,
             'dataset_visits':0,'fresh_verification_required':True,'downloads':entries,
+            'bootstrap_sha256':digest(REPLICATION/'bootstrap-guest.sh'),
+            'requirements_guest_sha256':digest(REPLICATION/'requirements-guest.txt'),
             'inputs_archive_sha256':expected['sha256']},indent=2)+'\n')
         success=True
         print('Setup passed. Run ResearchOperator.ps1 -Mode Run -MaxAttempts 10 -VerifyOnly first.',flush=True)

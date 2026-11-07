@@ -19,6 +19,9 @@ python3 -m venv /opt/phishing-study-fixtures/venv
 task_python=/opt/phishing-study-fixtures/venv/bin/python
 "$task_python" -m pip install --no-cache-dir -r /var/tmp/research-setup/requirements-guest.txt
 export PLAYWRIGHT_BROWSERS_PATH=/opt/phishing-study-fixtures/browsers
+# Installation downloads have a separate finite connection budget. This does
+# not alter navigation, collection, browser-close or service-stop deadlines.
+export PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT=120000
 "$task_python" -m playwright install --with-deps chromium
 "$task_python" - <<'PY'
 import json,os,platform,subprocess
