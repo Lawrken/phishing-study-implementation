@@ -99,13 +99,10 @@ def build(a):
     downloads = home/'downloads'; downloads.mkdir(parents=True, exist_ok=True)
     entries = json.loads((REPLICATION/'downloads.json').read_text())
     packages = {name: download(entries[name], downloads) for name in ('7zr','7zip','qemu','ubuntu')}
-    archive = a.inputs_archive.resolve() if a.inputs_archive else downloads/'study-inputs-v1.zip'
-    if not archive.exists():
-        if not shutil.which('gh'):
-            raise ValueError('Install GitHub CLI and sign in, or pass -InputsArchive with the release ZIP.')
-        subprocess.run(['gh','release','download','replication-v1','--repo','Lawrken/phishing-study-implementation',
-            '--pattern','study-inputs-v1.zip','--dir',str(downloads)],check=True,timeout=300)
     expected = json.loads((REPLICATION/'inputs-manifest.json').read_text())['archive']
+    archive = a.inputs_archive.resolve() if a.inputs_archive else download({
+        'url':'https://github.com/Lawrken/phishing-study-implementation/releases/download/replication-v1/study-inputs-v1.zip',
+        'filename':expected['name'],'algorithm':'sha256','digest':expected['sha256']},downloads)
     if digest(archive) != expected['sha256'] or archive.stat().st_size != expected['bytes']:
         raise ValueError('Input release checksum mismatch.')
     if a.downloads_only:
@@ -118,8 +115,6 @@ def build(a):
     configuration = a.configuration_output.resolve() if a.configuration_output else control/'host.json'
     if not configuration.is_relative_to(ROOT) or configuration.exists():
         raise ValueError('A fresh configuration path inside this clone is required. Existing setup is preserved.')
-    if not a.configuration_output and (ROOT/'.local-vm/ubuntu-20261020/private/operator_key').exists():
-        raise ValueError('The owner installation is preserved. Test a fresh clone or use --configuration-output.')
     stamp = datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')
     work = home/('build-'+stamp); work.mkdir()
     logfile = work/'setup.log'

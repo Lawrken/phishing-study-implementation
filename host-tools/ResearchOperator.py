@@ -49,6 +49,14 @@ def bounded_attempts(value):
     return value
 
 
+def prepare_run_directory(root, run_id):
+    parent = Path(root) / 'phishing-study/validation'
+    parent.mkdir(parents=True, exist_ok=True)
+    preparation = parent / (run_id + '-preparation')
+    preparation.mkdir(exist_ok=False)
+    return parent, preparation
+
+
 def continuation_record(prior, run_id, source_hash, archive_hash, attempts, candidate_ids, next_attempts):
     """Exclude every attempted endpoint, without copying or fabricating captures."""
     sys.path.insert(0, str(ROOT / 'phishing-study'))
@@ -155,9 +163,7 @@ def run(args):
         try:
             stamp = datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S-%f')
             run_id = 'operator-' + stamp
-            parent = ROOT / 'phishing-study/validation'
-            preparation = parent / (run_id + '-preparation')
-            preparation.mkdir(exist_ok=False)
+            parent, preparation = prepare_run_directory(ROOT, run_id)
             continuation_path = None
             if args.continue_previous:
                 _, previous_folder = current()

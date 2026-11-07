@@ -21,23 +21,8 @@ def host_configuration(root=ROOT):
     if not path.is_relative_to(root):
         raise ValueError('Machine configuration must stay inside this clone.')
     if not path.exists():
-        # Preserve the original owner's already-tested installation. A fresh
-        # clone has none of these files and must run SetupResearch.ps1.
-        private = root / '.local-vm/ubuntu-20261020/private'
-        receipt = root / 'phishing-study/validation/overnight-20261031-01/cloned-base-hash.json'
-        if not receipt.is_file() or not (private/'operator_key').is_file():
-            raise ValueError('Run host-tools/SetupResearch.ps1 first. No VM has been configured on this computer.')
-        value = {
-            'schema_version': 1, 'region': 'Laoag City, Philippines',
-            'qemu_directory': str(root/'.local-vm/qemu-review-20261031-01/extracted'),
-            'base_disk': str(root/'.local-vm/qemu-trial-20261031-01/current-disk-flat.raw'),
-            'base_format': 'raw', 'base_sha256': json.loads(receipt.read_text(encoding='utf-8-sig'))['sha256'],
-            'identity_file': str(private/'operator_key'), 'known_hosts_file': str(private/'known_hosts'),
-            'guest_user': 'studyadmin', 'legacy_owner_installation': True,
-            'original_virtualbox': {'executable': 'C:/Program Files/Oracle/VirtualBox/VBoxManage.exe',
-                'uuid': 'a61b2f52-ab59-4329-89d4-b684284b5e54'}}
-    else:
-        value = json.loads(path.read_text(encoding='utf-8-sig'))
+        raise ValueError('Run host-tools/SetupResearch.ps1 first. No VM has been configured on this computer.')
+    value = json.loads(path.read_text(encoding='utf-8-sig'))
     if value.get('schema_version') != 1 or value.get('base_format') not in {'raw', 'qcow2'}:
         raise ValueError('Unsupported machine configuration.')
     validate_region(value.get('region'))

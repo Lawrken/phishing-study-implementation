@@ -13,7 +13,7 @@ Install these ordinary prerequisites from their publishers:
 | Software | Purpose | Link |
 | --- | --- | --- |
 | Git for Windows | Download the code and updates | https://git-scm.com/downloads/win |
-| GitHub CLI | Access the private repository and input release | https://cli.github.com/ |
+| GitHub CLI (optional) | Convenience commands for forks and pull requests; not needed by setup | https://cli.github.com/ |
 | Python 3.12 or newer, Windows x64 | Run the Windows supervisor and setup | https://www.python.org/downloads/windows/ |
 | OpenSSH Client, a Windows optional feature | Send commands/files to the VM | https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse |
 
@@ -23,19 +23,17 @@ Check the installed commands:
 
 ```powershell
 git --version
-gh --version
 python --version
 Get-Command ssh, scp, ssh-keygen
 ```
 
 ## 2. Accept access and clone
 
-Sign in to GitHub as the invited account and accept the repository invitation. Then run:
+The repository is public; no invitation or collaborator write access is needed. For code changes, fork it and submit a pull request. To clone the original:
 
 ```powershell
-gh auth login
 cd "$HOME\Downloads"
-gh repo clone Lawrken/phishing-study-implementation
+git clone https://github.com/Lawrken/phishing-study-implementation.git
 cd phishing-study-implementation
 .\host-tools\ResearchOperator.ps1 -Mode Inspect
 ```
@@ -63,7 +61,7 @@ Automatic downloads are:
 | QEMU Windows 20260811 package | Runs the VM through WHPX; extracted locally, no system installer |
 | 7-Zip 26.05 helpers | Extract the QEMU package locally |
 | Ubuntu Noble cloud image dated 20261017 | Fresh guest operating system |
-| `study-inputs-v1.zip` from the private `replication-v1` release | Exact source CSV and frozen split/audit artifacts; about 55 MiB compressed |
+| `study-inputs-v1.zip` from the `replication-v1` release | Exact source CSV and frozen split/audit artifacts; about 55 MiB compressed |
 | Python packages and matching Playwright Chromium | Guest collector/test runtime; Chromium is installed in Ubuntu |
 
 Downloads live under `.local-vm/portable/downloads/`. VM build logs and per-machine keys live under `.local-vm/portable/build-.../`. `.operator/host.json` records their local paths and base-disk hash. All are excluded from Git. Do not upload these folders or share the private keys.
@@ -141,7 +139,7 @@ Ctrl+C closes that saved viewer only. Close it before another Run, since both us
 | `5 GiB available RAM ... required` | Close unused apps yourself, check Inspect again and rerun. Nothing was collected. |
 | `50 GiB ... required` | Free space on the clone's drive or move the clone before setup. Do not delete research evidence to bypass this check. |
 | Python not found | Install x64 Python 3.12+, reopen PowerShell or set `PHISHING_STUDY_PYTHON` to its executable. |
-| GitHub repository/release not found | Sign in to the invited account and accept private-repository access. |
+| GitHub repository/release not found | Check the repository and release URL. The source repository is public. |
 | Download checksum mismatch | The bytes differ from the frozen pin. Preserve the failed download and ask for a reviewed manifest update; do not disable checking. |
 | `WHPX` / VM exits before SSH | Check Windows Hypervisor Platform and virtualization. Preserve QEMU/serial logs. No automatic fallback accelerator or Windows protection change occurs. |
 | SSH host-key mismatch | Stop. Do not disable strict checking. Check whether the key/base/config belongs to this computer's completed setup. |

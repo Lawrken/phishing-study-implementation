@@ -2,17 +2,18 @@
 
 This project visits frozen PhiUSIIL dataset endpoints inside a disposable Ubuntu VM, records browser traffic and website measurements, and preserves both successful captures and failed visits. Chromium renders the page; Playwright controls it and records request/response events. Python also measures DNS and input-origin certificate metadata.
 
-**Start with [the friend setup guide](docs/FRIEND_SETUP.md).** The supported operator host is Windows x64 with QEMU/WHPX. VirtualBox and a Linux desktop are not needed for this route.
+**Start with [the two-laptop assignment plan](docs/TWO_LAPTOP_PLAN.md) and [the AI handoff](docs/AI_DATASET_HANDOFF.md).** The full dataset assignments are prepared, but the current operator does not ingest them yet. Its existing Run command still selects the original shared 400-record reserve. Do not use it on both laptops expecting the new assignments to apply.
+
+**Setup is a prerelease:** fresh Ubuntu/SSH/Python preparation succeeded, but the pinned Chromium download timed out. See [measured release status](docs/RELEASE_VALIDATION.md). The supported operator host is Windows x64 with QEMU/WHPX. VirtualBox and a Linux desktop are not needed for this route.
 
 ## Clone and prepare
 
-Accept the private GitHub invitation first. Install [Git](https://git-scm.com/downloads/win), [GitHub CLI](https://cli.github.com/) and [64-bit Python 3.12 or newer](https://www.python.org/downloads/windows/). Windows OpenSSH Client, firmware virtualization and Windows Hypervisor Platform must be available. Setup does not change Windows features or security settings.
+The repository is public. Install [Git](https://git-scm.com/downloads/win) and [64-bit Python 3.12 or newer](https://www.python.org/downloads/windows/). Windows OpenSSH Client, firmware virtualization and Windows Hypervisor Platform must be available. Setup downloads public release inputs directly; GitHub CLI is optional. Setup does not change Windows features or security settings.
 
 In PowerShell:
 
 ```powershell
-gh auth login
-gh repo clone Lawrken/phishing-study-implementation
+git clone https://github.com/Lawrken/phishing-study-implementation.git
 cd phishing-study-implementation
 .\host-tools\ResearchOperator.ps1 -Mode Inspect
 .\host-tools\SetupResearch.ps1 -Region 'YOUR ACTUAL CITY, COUNTRY'
@@ -81,4 +82,4 @@ The original training/validation/test membership and input hashes are frozen in 
 | `phishing-study/tests/` | Linux/browser and policy regressions |
 | `replication/` | Download pins, package versions and guest setup |
 
-Read [replication and evidence limits](docs/REPRODUCIBILITY.md), [troubleshooting](docs/FRIEND_SETUP.md#troubleshooting) and [third-party attribution](THIRD_PARTY.md). Fresh deployment verification is mandatory on every collection host; a passing CI run or setup receipt is not deployment approval.
+For changes, fork the repository and submit a pull request; no collaborator write access is needed. Keep raw observations, VM disks and credentials out of Git. Read [replication and evidence limits](docs/REPRODUCIBILITY.md), [troubleshooting](docs/FRIEND_SETUP.md#troubleshooting) and [third-party attribution](THIRD_PARTY.md). Fresh deployment verification is mandatory on every collection host; a passing CI run or setup receipt is not deployment approval.

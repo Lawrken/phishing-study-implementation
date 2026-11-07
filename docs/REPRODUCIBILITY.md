@@ -1,6 +1,6 @@
 # What replication establishes
 
-The repository reproduces the method and software, not tomorrow's website contents. Its private release preserves the exact PhiUSIIL source CSV, frozen offline split membership and audit. SHA-256 identities are committed in `replication/inputs-manifest.json`. Source labels stay historical dataset labels; the code does not silently upgrade them to independently reviewed current labels.
+The repository reproduces the method and software, not tomorrow's website contents. Its separate input release preserves the exact PhiUSIIL source CSV, frozen offline split membership and audit. SHA-256 identities are committed in `replication/inputs-manifest.json`. Source labels stay historical dataset labels; the code does not silently upgrade them to independently reviewed current labels.
 
 The standard intake rebuilds the same 400-record reserve from original training groups using seed 20261010. Mixed-label domain groups are excluded and one endpoint is selected per distinct group. Validation/test groups are preserved. No live reachability screening, model predictions or new training determines the reserve.
 

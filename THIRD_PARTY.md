@@ -12,4 +12,4 @@ Primary documentation used for setup and implementation:
 - 7-Zip downloads and licensing: https://www.7-zip.org/download.html and https://www.7-zip.org/license.txt. Setup downloads and extracts helpers without installing them system-wide.
 - pycdlib ISO-generation library: https://github.com/clalancette/pycdlib.
 
-This private academic repository does not grant a new open-source license to the project code. Obtain the project owners' agreement before redistributing it publicly. Upstream software and the UCI dataset remain governed by their own licenses.
+Making the academic source repository public does not add a new open-source license to the project code. Upstream software and the UCI dataset remain governed by their own licenses; the dataset remains CC BY 4.0.

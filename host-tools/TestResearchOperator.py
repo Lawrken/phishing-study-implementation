@@ -9,6 +9,17 @@ import ResearchOperator as operator
 
 
 class OperatorControlTests(unittest.TestCase):
+    def test_first_run_creates_missing_output_parent_and_refuses_reuse(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            parent, preparation = operator.prepare_run_directory(root, 'operator-new')
+            self.assertTrue(parent.is_dir())
+            self.assertTrue(preparation.is_dir())
+            (preparation/'preserved.txt').write_text('original')
+            with self.assertRaises(FileExistsError):
+                operator.prepare_run_directory(root, 'operator-new')
+            self.assertEqual((preparation/'preserved.txt').read_text(), 'original')
+
     def test_continuation_preserves_all_attempted_ids_and_receipts(self):
         prior = operator.continuation_record(None, 'operator-first', 'a'*64, 'b'*64,
                                              10, ['c'*64, 'd'*64], 10)

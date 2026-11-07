@@ -22,6 +22,7 @@ export PLAYWRIGHT_BROWSERS_PATH=/opt/phishing-study-fixtures/browsers
 # Installation downloads have a separate finite connection budget. This does
 # not alter navigation, collection, browser-close or service-stop deadlines.
 export PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT=120000
+export NODE_OPTIONS=--dns-result-order=ipv4first
 "$task_python" -m playwright install --with-deps chromium
 "$task_python" - <<'PY'
 import json,os,platform,subprocess

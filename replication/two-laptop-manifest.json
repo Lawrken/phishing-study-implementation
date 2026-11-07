@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "assignment_id": "49ff04f6a6c775dc3c6d3b21bb7dc6bb448607fb658b6cd07c6c606d91a9369f",
+  "algorithm": "phiusiil-two-laptop-domain-balanced-v1",
+  "seed": 20261010,
+  "operators": {
+    "Lawrken": {
+      "csv": "assignment-lawrken.csv",
+      "rows": 117339,
+      "published_class_counts": {
+        "legitimate": 67425,
+        "phishing": 49914
+      },
+      "original_partitions": {
+        "train": {
+          "legitimate": 40455,
+          "phishing": 29948
+        },
+        "validation": {
+          "legitimate": 13485,
+          "phishing": 9983
+        },
+        "test": {
+          "legitimate": 13485,
+          "phishing": 9983
+        }
+      },
+      "domain_groups": 98673,
+      "mixed_label_domain_groups": 60
+    },
+    "AR-AR-prog": {
+      "csv": "assignment-ar-ar-prog.csv",
+      "rows": 117338,
+      "published_class_counts": {
+        "legitimate": 67424,
+        "phishing": 49914
+      },
+      "original_partitions": {
+        "train": {
+          "legitimate": 40454,
+          "phishing": 29948
+        },
+        "validation": {
+          "legitimate": 13485,
+          "phishing": 9983
+        },
+        "test": {
+          "legitimate": 13485,
+          "phishing": 9983
+        }
+      },
+      "domain_groups": 99030,
+      "mixed_label_domain_groups": 45
+    }
+  },
+  "source_sha256": "a236549cd369cd80bd478ff8e1779cbf44c58d5c3f79f7a51a1adbed7d06d1c6",
+  "membership_sha256": "86d8efa12acabaee64dd126b8a99f5523b25daf561e75826d371780d03782cb3",
+  "audit_sha256": "0de6f2242f547e09c2cc44d8cba32297607728b40e9f0a5385ffbe62e63f4a4f",
+  "census": {
+    "rows": 235795,
+    "source_label_counts": {
+      "0": 100945,
+      "1": 134850
+    },
+    "retained_rows": 234677,
+    "retained_class_counts": {
+      "legitimate": 134849,
+      "phishing": 99828
+    },
+    "exclusion_counts": {
+      "invalid_canonical_url": 10,
+      "canonical_url_label_conflict": 2,
+      "duplicate_url_same_label": 1106
+    },
+    "original_partition_rows": {
+      "test": 46936,
+      "train": 140805,
+      "validation": 46936
+    }
+  },
+  "allocation": {
+    "domain_groups": 197703,
+    "mixed_label_domain_groups": 105,
+    "group_rule": "All endpoints in a domain/private-PSL tenant group stay on one laptop.",
+    "target_cell_counts": [
+      {
+        "train": {
+          "legitimate": 40455,
+          "phishing": 29948
+        },
+        "validation": {
+          "legitimate": 13485,
+          "phishing": 9983
+        },
+        "test": {
+          "legitimate": 13485,
+          "phishing": 9983
+        }
+      },
+      {
+        "train": {
+          "legitimate": 40454,
+          "phishing": 29948
+        },
+        "validation": {
+          "legitimate": 13485,
+          "phishing": 9983
+        },
+        "test": {
+          "legitimate": 13485,
+          "phishing": 9983
+        }
+      }
+    ]
+  },
+  "files": {
+    "assignment-lawrken.csv": {
+      "sha256": "f6ac00be60be6e243d445fe177336735d4c5f9c40bec3020ba99aee2d09f13bf",
+      "bytes": 41113879
+    },
+    "assignment-ar-ar-prog.csv": {
+      "sha256": "933dcfaa2da53fc65ae259f9bca70ee00f0b620b3b58747766100e8093187fb0",
+      "bytes": 41476311
+    }
+  },
+  "validation": {
+    "row_id_overlap": 0,
+    "url_hash_overlap": 0,
+    "domain_group_hash_overlap": 0,
+    "cleaned_population_covered_exactly": true,
+    "duplicate_urls_within_assignments": 0,
+    "emitted_rows_replayed_against_originals": true,
+    "original_inputs_unchanged": true
+  },
+  "ordering": "Within each published class: sha256(seed:visit:url_hash); alternate legitimate,phishing, then remaining majority.",
+  "label_mapping": {
+    "0": "phishing",
+    "1": "legitimate"
+  },
+  "label_confidence": "dataset",
+  "mixed_label_domains": "Preserved on one laptop; no extra exclusions beyond the original cleaned population.",
+  "purpose": "Offline workload assignments for a future two-laptop campaign; not activation evidence.",
+  "collection_activation": false,
+  "endpoint_visits_during_split": 0,
+  "current_operator_compatible": false,
+  "current_operator_limit": 400,
+  "heldout_partitions": "Preserved metadata; not moved into training or used for model selection.",
+  "splitter_sha256": "053554ba0d8fcb6ca2165e95ac64b4a3a7ee8c06de77d3cbde9d51c2aa3ab109",
+  "grouping_code_sha256": "10eab245f026ba327fa43fbed1b744ef7f25e05e21d90330232bea9429222ba6",
+  "cleaning_code_sha256": "8a4dd8e3aa12788b41d282b80135a2ffbccc937c91afa495b303ceb96200b390",
+  "tldextract": "5.4.0",
+  "generated_utc": "2026-11-07T06:48:36.962629+00:00"
+}
